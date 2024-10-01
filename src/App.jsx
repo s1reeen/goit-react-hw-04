@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchArticles } from "./services/api";
+import ImagesList from "./components/ImagesList/ImagesList";
 
 const App = () => {
   const [images, setImages] = useState([]);
@@ -10,24 +11,13 @@ const App = () => {
         const data = await fetchArticles();
         setImages(data.results);
       } catch (error) {
-        console.error("Ошибка при загрузке изображений:", error);
+        console.error("Error in loading images:", error);
       }
     };
     getData();
   }, []);
 
-  return (
-    <div>
-      <h1>Image Search</h1>
-      <ul>
-        {images.map((image) => (
-          <li key={image.id}>
-            <img src={image.urls.regular} alt={image.alt_description} />
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+  return <>{images.length && <ImagesList images={images} />}</>;
 };
 
 export default App;
