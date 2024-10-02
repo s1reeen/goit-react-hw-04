@@ -6,6 +6,7 @@ import Loader from "./components/Loader/Loader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import ImagesModal from "./components/ImagesModal/ImagesModal";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   const [images, setImages] = useState([]);
@@ -75,6 +76,7 @@ const App = () => {
         imageUrl={selectedImage.urls?.regular}
         alt={selectedImage.alt_description}
       />
+      <ToastContainer />
     </>
   );
 };

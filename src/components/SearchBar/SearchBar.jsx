@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import styles from "./SearchBar.module.css";
 
 const Searchbar = ({ onSearch }) => {
@@ -11,6 +13,12 @@ const Searchbar = ({ onSearch }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    if (query.trim() === "") {
+      toast.error("Please enter a search query!");
+      return;
+    }
+
     onSearch(query);
     setQuery("");
   };
