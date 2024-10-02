@@ -26,3 +26,15 @@
 .galleryItem:hover {
   transform: scale(1.1);
 }
+
+@media (max-width: 768px) {
+  .galleryGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .galleryGrid {
+    grid-template-columns: 1fr;
+  }
+}
