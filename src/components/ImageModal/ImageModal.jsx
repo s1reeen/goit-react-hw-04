@@ -3,7 +3,7 @@ import css from "./ImagesModal.module.css";
 
 Modal.setAppElement("#root");
 
-const ImagesModal = ({ isOpen, onClose, imageUrl, alt }) => {
+const ImageModal = ({ isOpen, onClose, imageUrl, alt }) => {
   return (
     <Modal isOpen={isOpen} onRequestClose={onClose} className={css.modal}>
       <button onClick={onClose} className={css.closeButton}>
@@ -14,4 +14,4 @@ const ImagesModal = ({ isOpen, onClose, imageUrl, alt }) => {
   );
 };
 
-export default ImagesModal;
+export default ImageModal;

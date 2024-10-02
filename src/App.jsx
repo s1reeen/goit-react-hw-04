@@ -5,7 +5,7 @@ import Searchbar from "./components/SearchBar/SearchBar";
 import Loader from "./components/Loader/Loader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
-import ImagesModal from "./components/ImagesModal/ImagesModal";
+import ImagesModal from "./components/ImageModal/ImageModal";
 import { ToastContainer } from "react-toastify";
 
 const App = () => {
