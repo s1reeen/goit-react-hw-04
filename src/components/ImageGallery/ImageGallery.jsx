@@ -1,6 +1,6 @@
 import css from "./ImageGallery.module.css";
 
-const ImageGallery = ({ images }) => {
+const ImageGallery = ({ images, onImageClick }) => {
   return (
     <div className={css.galleryContainer}>
       <ul className={css.galleryGrid}>
@@ -8,8 +8,8 @@ const ImageGallery = ({ images }) => {
           <li key={`${image.id}-${index}`} className={css.galleryItem}>
             <img
               src={image.urls.regular}
-              alt={image.alt_description}
               className={css.galleryImage}
+              onClick={() => onImageClick(image)}
             />
           </li>
         ))}
