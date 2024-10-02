@@ -1,0 +1,19 @@
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.loadButton {
+  color: white;
+  background-color: rgb(26, 26, 176);
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.loadButton:hover {
+  background-color: rgb(26, 26, 176);
+  transform: scale(1.1);
+}

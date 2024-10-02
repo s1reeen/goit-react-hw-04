@@ -1,35 +1,54 @@
 import { useEffect, useState } from "react";
 import { fetchArticles } from "./services/api";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
-import Searchbar from "./components/SearchBar/Searchbar";
+import Searchbar from "./components/SearchBar/SearchBar";
 import Loader from "./components/Loader/Loader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
+import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 
 const App = () => {
   const [images, setImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [query, setQuery] = useState("moon"); // Начальный запрос
+
+  const getData = async (query, pageNum) => {
+    setIsLoading(true);
+    try {
+      const data = await fetchArticles(query, pageNum);
+      setImages((prevImages) => [...prevImages, ...data.results]);
+    } catch (err) {
+      console.error(err);
+      setError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const data = await fetchArticles();
-        setImages(data.results);
-      } catch {
-        setError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    getData();
-  }, []);
+    getData(query, page);
+  }, [query, page]);
+
+  const handleSearch = (searchQuery) => {
+    setQuery(searchQuery);
+    setImages([]); // Сбрасываем изображения при новом поиске
+    setPage(1); // Сбрасываем страницу на 1
+  };
+
+  const loadMoreImages = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
 
   return (
     <>
-      <Searchbar />
+      <Searchbar onSearch={handleSearch} />
+      {error && <ErrorMessage />}
       {images.length > 0 && <ImageGallery images={images} />}
       {isLoading && <Loader />}
-      {error && <ErrorMessage />}
+      {!isLoading && (
+        <LoadMoreBtn onLoadMore={loadMoreImages} disable={isLoading} />
+      )}
     </>
   );
 };

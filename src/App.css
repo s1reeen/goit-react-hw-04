@@ -1,0 +1,6 @@
+.loaderContainer {
+  position: fixed; /* Или absolute, если у вас есть определённый родительский элемент */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
