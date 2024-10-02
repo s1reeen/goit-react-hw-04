@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { fetchArticles } from "./services/api";
-import ImagesList from "./components/ImagesList/ImagesList";
-import { ThreeDots } from "react-loader-spinner";
+import ImageGallery from "./components/ImageGallery/ImageGallery";
+import Searchbar from "./components/SearchBar/Searchbar";
+import Loader from "./components/Loader/Loader";
+import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 
 const App = () => {
   const [images, setImages] = useState([]);
@@ -13,8 +15,7 @@ const App = () => {
       try {
         const data = await fetchArticles();
         setImages(data.results);
-      } catch (error) {
-        console.error("Error in loading images:", error);
+      } catch {
         setError(true);
       } finally {
         setIsLoading(false);
@@ -25,20 +26,10 @@ const App = () => {
 
   return (
     <>
-      {images.length > 0 && <ImagesList images={images} />}
-      {isLoading && (
-        <ThreeDots
-          visible={true}
-          height="80"
-          width="80"
-          color="#4fa94d"
-          radius="9"
-          ariaLabel="three-dots-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-        />
-      )}
-      {error && <p>There was an error loading the images</p>}
+      <Searchbar />
+      {images.length > 0 && <ImageGallery images={images} />}
+      {isLoading && <Loader />}
+      {error && <ErrorMessage />}
     </>
   );
 };

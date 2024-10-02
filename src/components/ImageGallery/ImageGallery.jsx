@@ -1,4 +1,4 @@
-const ImagesList = ({ images }) => {
+const ImageGallery = ({ images }) => {
   return (
     <div>
       <ul>
@@ -12,4 +12,4 @@ const ImagesList = ({ images }) => {
   );
 };
 
-export default ImagesList;
+export default ImageGallery;
